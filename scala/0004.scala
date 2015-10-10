@@ -6,4 +6,4 @@ val palindromes = for {
   prod = a * b
   if isPalindrome(prod.toString)
 } yield prod
-println(pairs.max)
+println(palindromes.max)
