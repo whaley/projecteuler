@@ -18,5 +18,7 @@ def squareOfSums(n: Int) = {
 }
 
 def diff(n: Int): Int = {
-  
+  squareOfSums(n) - sumOfSquares(n)
 }
+
+println(diff(100))
