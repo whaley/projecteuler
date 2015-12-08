@@ -21,10 +21,13 @@ val input = """
 71636269561882670428252483600823257530420752963450
 """
 
+//1) Model the number as a sequence, split at 0, and remove whitespaces
+val digitVectors = input.filter(!_.isWhitespace).split("0")
+  .map((s: String) => s.map(_.asDigit)).toVector
 
-//1) Model the number as a sequence
-//2) Split the sequence at 0 to produce N splits
-//3) Filter out N splits if they have less than 13 items
-//4) For each remaining split, flatmap each split to a List[Int] where each List has a length of 13
-//5) Map each 13 item split to the product of each item
-//6) Find the max
+//2) Filter out N splits if they have less than 13 items
+val candidateVectors = digitVectors.filter(_.size >= 13)
+
+//3) For each remaining split, flatmap each split to a List[Int] where each List has a length of 13
+//4) Map each 13 item split to the product of each item
+//5) Find the max
