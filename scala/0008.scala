@@ -26,8 +26,12 @@ val digitVectors = input.filter(!_.isWhitespace).split("0")
   .map((s: String) => s.map(_.asDigit)).toVector
 
 //2) Filter out N splits if they have less than 13 items
-val candidateVectors = digitVectors.filter(_.size >= 13)
+val segmentsOf13OrMore = digitVectors.filter(_.size >= 13).flatMap(_.sliding(13,1))
 
 //3) For each remaining split, flatmap each split to a List[Int] where each List has a length of 13
-//4) Map each 13 item split to the product of each item
-//5) Find the max
+val candidates = segmentsOf13OrMore.flatMap(_.sliding(13,1))
+
+// 4) Map each 13 item split to the product of each item (use long to avoid overflow)
+// 5) Find the max
+val maxProduct = candidates.map((v) => v.map(_.toLong)).map(_.product).max
+println(maxProduct)
